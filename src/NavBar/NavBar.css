@@ -1,3 +1,11 @@
 nav {
-    border: 2px solid green;
+  border: 2px solid green;
+  display: flex;
+  position: sticky;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  top: 0;
+  right: 0;
+  left: 0;
 }

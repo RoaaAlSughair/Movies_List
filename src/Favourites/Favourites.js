@@ -6,7 +6,7 @@ export default function Favourites() {
   return (
     <div className="favourites">
       <Link to="/">Back</Link>
-      Favourites
+      <h2>Favourites</h2>
     </div>
   );
 }
