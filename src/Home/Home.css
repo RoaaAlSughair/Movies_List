@@ -1,6 +1,5 @@
 .home {
-  border: 2px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1rem;
+  gap: 2rem 4rem;
 }

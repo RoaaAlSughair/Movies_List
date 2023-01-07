@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BsFillHeartFill } from "react-icons/bs";
 import axios from "axios";
 import "./Home.css";
 
@@ -10,6 +11,16 @@ export default function Home() {
     console.log(page_num);
     setPage_num(e.target.dataset.num);
   };
+
+  // Solve the icon-in-button bubbling problem
+  const addToFavorite = (e) => {
+    console.log(e.target.parentNode.dataset.id);
+    if (localStorage.getItem("liked")) {
+      let arr = JSON.parse(localStorage.getItem("liked"));
+      arr.push(e.target.parentNode.dataset.id);
+      localStorage.setItem("liked", JSON.stringify(arr));
+    } else localStorage.setItem("liked", JSON.stringify([e.target.parentNode.dataset.id]));
+  }
 
   useEffect(() => {
     axios
@@ -28,15 +39,15 @@ export default function Home() {
     <div className="home">
       {movies.map((el) => {
         return (
-          <div>
+          <div data-id={el.id}>
             <img
               src={"https://image.tmdb.org/t/p/w500" + el.poster_path}
               alt={el.title + " poster"}
-              width="200"
               height="300"
-            ></img>
+            />
             <p>{el.title}</p>
             <p>{el.vote_average} / 10</p>
+            <button onClick={addToFavorite}>Add to fave</button>
           </div>
         );
       })}
