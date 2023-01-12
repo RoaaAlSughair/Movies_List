@@ -1,5 +1,6 @@
 nav {
-  border: 2px solid green;
+  background-color: white;
+  box-shadow: 0px 2px 4px #9cadf2;
   display: flex;
   position: sticky;
   align-items: center;

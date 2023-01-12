@@ -9,10 +9,7 @@ export default function NavBar() {
       <h1>MoviesList</h1>
       <span>
         <Link to="/favourites">
-          <figure>
             <BsFillHeartFill />
-            <figcaption>Favourites</figcaption>
-          </figure>
         </Link>
       </span>
     </nav>
