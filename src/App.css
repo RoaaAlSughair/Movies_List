@@ -34,7 +34,7 @@ a::after {
 }
 
 main {
-  background-color: #ECEFF6;
+  background-color: #eceff6;
   padding: 3rem;
   min-height: 100vh;
 }
@@ -63,7 +63,7 @@ button {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem 3rem;
 }
 
@@ -83,4 +83,16 @@ button {
   text-overflow: ellipsis;
   -webkit-line-clamp: 1;
   white-space: normal;
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
 }
