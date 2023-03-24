@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
-import { TbHeartPlus, TbHeartMinus } from "react-icons/tb";
+import { TbHeartPlus } from "react-icons/tb";
 import axios from "axios";
 import "./Home.css";
 
@@ -20,11 +20,10 @@ export default function Home() {
     setPage_num(page_num + 1);
   }
 
-  // Solve the icon-in-button bubbling problem
   const addToFavorite = (e) => {
     if (localStorage.getItem("liked")) {
       let arr = JSON.parse(localStorage.getItem("liked"));
-      arr.push(e.target.parentNode.dataset.id);
+      arr.push(e.currentTarget.parentElement.dataset.id);
       localStorage.setItem("liked", JSON.stringify(arr));
     } else
       localStorage.setItem(
@@ -51,7 +50,7 @@ export default function Home() {
       <div className="wrapper">
         {movies.map((el) => {
           return (
-            <div className="movie_card" data-id={el.id}>
+            <div className="movie_card" key={el.id} data-id={el.id}>
               <img
                 src={"https://image.tmdb.org/t/p/w500" + el.poster_path}
                 alt={el.title + " poster"}
@@ -59,7 +58,7 @@ export default function Home() {
               />
               <h4>{el.title}</h4>
               <p>{el.vote_average} / 10</p>
-              <button onClick={addToFavorite}>Add to fave</button>
+              <button onClick={addToFavorite}><TbHeartPlus></TbHeartPlus></button>
             </div>
           );
         })}

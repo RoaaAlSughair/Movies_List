@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TbHeartMinus } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Favourites.css";
@@ -7,8 +8,8 @@ export default function Favourites() {
   const [faves, setFaves] = useState([]);
   let arr = JSON.parse(localStorage.getItem("liked"));
 
-  const handleClick = (e) => {
-    let i = arr.indexOf(e.target.parentNode.dataset.id);
+  const removeFromFavorites = (e) => {
+    let i = arr.indexOf(e.currentTarget.parentElement.dataset.id);
     arr.splice(i, 1);
     localStorage.setItem("liked", JSON.stringify(arr));
   };
@@ -42,7 +43,7 @@ export default function Favourites() {
         {faves.length
           ? faves.map((el) => {
               return (
-                <div className="movie_card" data-id={el.id}>
+                <div className="movie_card" key={el.id} data-id={el.id}>
                   <img
                     src={"https://image.tmdb.org/t/p/w500" + el.poster_path}
                     alt={el.title + " poster"}
@@ -50,7 +51,7 @@ export default function Favourites() {
                   />
                   <h4>{el.title}</h4>
                   <p>{el.vote_average} / 10</p>
-                  <button onClick={handleClick}>Remove from fave</button>
+                  <button onClick={removeFromFavorites}><TbHeartMinus></TbHeartMinus></button>
                 </div>
               );
             })
