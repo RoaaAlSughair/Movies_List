@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
-import { TbHeartPlus } from "react-icons/tb";
-import axios from "axios";
-import "./Home.css";
+import React, { useState, useEffect } from 'react';
+import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
+import { TbHeartPlus } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './Home.css';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -14,20 +15,20 @@ export default function Home() {
 
   const onePageBackwards = () => {
     setPage_num(page_num - 1);
-  }
+  };
 
   const onePageForwards = () => {
     setPage_num(page_num + 1);
-  }
+  };
 
   const addToFavorite = (e) => {
-    if (localStorage.getItem("liked")) {
-      let arr = JSON.parse(localStorage.getItem("liked"));
+    if (localStorage.getItem('liked')) {
+      let arr = JSON.parse(localStorage.getItem('liked'));
       arr.push(e.currentTarget.parentElement.dataset.id);
-      localStorage.setItem("liked", JSON.stringify(arr));
+      localStorage.setItem('liked', JSON.stringify(arr));
     } else
       localStorage.setItem(
-        "liked",
+        'liked',
         JSON.stringify([e.target.parentNode.dataset.id])
       );
   };
@@ -52,13 +53,17 @@ export default function Home() {
           return (
             <div className="movie_card" key={el.id} data-id={el.id}>
               <img
-                src={"https://image.tmdb.org/t/p/w500" + el.poster_path}
-                alt={el.title + " poster"}
+                src={'https://image.tmdb.org/t/p/w500' + el.poster_path}
+                alt={el.title + ' poster'}
                 height="300"
               />
-              <h4>{el.title}</h4>
+              <Link to={'/movieDetails?id=' + el.id}>
+                <h4>{el.title}</h4>
+              </Link>
               <p>{el.vote_average} / 10</p>
-              <button onClick={addToFavorite}><TbHeartPlus></TbHeartPlus></button>
+              <button onClick={addToFavorite}>
+                <TbHeartPlus></TbHeartPlus>
+              </button>
             </div>
           );
         })}
