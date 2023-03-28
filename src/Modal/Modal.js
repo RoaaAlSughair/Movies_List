@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Modal.css";
+import './Modal.css';
 
 function Modal(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,15 @@ function Modal(props) {
               &times;
             </span>
             <p>{props.message}</p>
-            <button data-id={props.id} onClick={props.handleClick}>Yes</button>
+            <button
+              data-id={props.id}
+              onClick={(e) => {
+                props.handleClick(e);
+                toggleModal();
+              }}
+            >
+              Yes
+            </button>
           </div>
         </div>
       )}

@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { BsFillStarFill } from "react-icons/bs";
-import { TbHeartMinus } from "react-icons/tb";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { BsFillStarFill } from 'react-icons/bs';
+import { TbHeartMinus } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Modal from '../Modal/Modal';
-import "./Favourites.css";
+import './Favourites.css';
 
 export default function Favourites() {
   const [faves, setFaves] = useState([]);
-  let arr = JSON.parse(localStorage.getItem("liked"));
+  let arr = JSON.parse(localStorage.getItem('liked'));
 
   const removeFromFavorites = (e) => {
     let i = arr.indexOf(e.currentTarget.dataset.id);
     arr.splice(i, 1);
-    localStorage.setItem("liked", JSON.stringify(arr));
+    localStorage.setItem('liked', JSON.stringify(arr));
   };
 
-  useEffect(() => {
+  const getFavorites = (arr) => {
     Promise.all(
       arr.map((el) =>
         axios
@@ -35,6 +35,10 @@ export default function Favourites() {
       .catch((err) => {
         throw err;
       });
+  };
+
+  useEffect(() => {
+    getFavorites(arr);
   }, [arr]);
 
   return (
@@ -47,13 +51,25 @@ export default function Favourites() {
               return (
                 <div className="movie_card" key={el.id} data-id={el.id}>
                   <img
-                    src={"https://image.tmdb.org/t/p/w500" + el.poster_path}
-                    alt={el.title + " poster"}
+                    src={'https://image.tmdb.org/t/p/w500' + el.poster_path}
+                    alt={el.title + ' poster'}
                     height="300"
                   />
                   <h4>{el.title}</h4>
-                  <p><BsFillStarFill></BsFillStarFill> {el.vote_average}</p>
-                  <Modal id={el.id} button_content={<TbHeartMinus></TbHeartMinus>} message="Do you want to remove this movie from your favorites?" handleClick={removeFromFavorites}/>
+                  <span>
+                    <BsFillStarFill></BsFillStarFill>
+                    <p>{el.vote_average}</p>
+                  </span>
+                  <Modal
+                    id={el.id}
+                    button_content={<TbHeartMinus></TbHeartMinus>}
+                    message={
+                      "Do you want to remove '" +
+                      el.title +
+                      "' movie from your favorites?"
+                    }
+                    handleClick={removeFromFavorites}
+                  />
                 </div>
               );
             })

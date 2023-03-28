@@ -41,9 +41,10 @@ export default function MovieDetails() {
           <section className="details">
             <h1>{data.title}</h1>
             <p>{data.release_date}</p>
-            <p>
-              <BsFillStarFill></BsFillStarFill> {data.vote_average}
-            </p>
+            <span>
+              <BsFillStarFill></BsFillStarFill>
+              <p>{data.vote_average}</p>
+            </span>
             <ul>
               {data.production_companies.map((el) => {
                 return <li key={el.id}>{el.name}</li>;
