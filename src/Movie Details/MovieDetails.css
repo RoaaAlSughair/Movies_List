@@ -14,3 +14,19 @@
   gap: 1rem;
   justify-content: center;
 }
+
+@media (max-width: 900px) {
+  .details-wrapper{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .details{
+    text-align: center;
+  }
+
+  .details span {
+    justify-content: center;
+  }
+}
