@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TbHeartMinus } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Modal from '../Modal/Modal';
 import "./Favourites.css";
 
 export default function Favourites() {
@@ -9,7 +10,7 @@ export default function Favourites() {
   let arr = JSON.parse(localStorage.getItem("liked"));
 
   const removeFromFavorites = (e) => {
-    let i = arr.indexOf(e.currentTarget.parentElement.dataset.id);
+    let i = arr.indexOf(e.currentTarget.dataset.id);
     arr.splice(i, 1);
     localStorage.setItem("liked", JSON.stringify(arr));
   };
@@ -51,7 +52,7 @@ export default function Favourites() {
                   />
                   <h4>{el.title}</h4>
                   <p>{el.vote_average} / 10</p>
-                  <button onClick={removeFromFavorites}><TbHeartMinus></TbHeartMinus></button>
+                  <Modal id={el.id} button_content={<TbHeartMinus></TbHeartMinus>} message="Do you want to remove this movie from your favorites?" handleClick={removeFromFavorites}/>
                 </div>
               );
             })

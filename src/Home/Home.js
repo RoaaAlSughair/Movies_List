@@ -3,6 +3,7 @@ import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import { TbHeartPlus } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Modal from '../Modal/Modal';
 import './Home.css';
 
 export default function Home() {
@@ -24,12 +25,12 @@ export default function Home() {
   const addToFavorite = (e) => {
     if (localStorage.getItem('liked')) {
       let arr = JSON.parse(localStorage.getItem('liked'));
-      arr.push(e.currentTarget.parentElement.dataset.id);
+      arr.push(e.currentTarget.dataset.id);
       localStorage.setItem('liked', JSON.stringify(arr));
     } else
       localStorage.setItem(
         'liked',
-        JSON.stringify([e.target.parentNode.dataset.id])
+        JSON.stringify([e.currentTarget.dataset.id])
       );
   };
 
@@ -61,9 +62,8 @@ export default function Home() {
                 <h4>{el.title}</h4>
               </Link>
               <p>{el.vote_average} / 10</p>
-              <button onClick={addToFavorite}>
-                <TbHeartPlus></TbHeartPlus>
-              </button>
+              {/* Add style to Modal and modify its name to be more representative */}
+              <Modal id={el.id} button_content={<TbHeartPlus></TbHeartPlus>} message="Do you want to add this movie to your favorites?" handleClick={addToFavorite}/>
             </div>
           );
         })}
