@@ -1,0 +1,16 @@
+.details-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.details-wrapper img {
+  height: 100%;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}

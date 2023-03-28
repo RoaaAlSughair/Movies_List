@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BsFillStarFill } from "react-icons/bs";
 import { TbHeartMinus } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -51,7 +52,7 @@ export default function Favourites() {
                     height="300"
                   />
                   <h4>{el.title}</h4>
-                  <p>{el.vote_average} / 10</p>
+                  <p><BsFillStarFill></BsFillStarFill> {el.vote_average}</p>
                   <Modal id={el.id} button_content={<TbHeartMinus></TbHeartMinus>} message="Do you want to remove this movie from your favorites?" handleClick={removeFromFavorites}/>
                 </div>
               );

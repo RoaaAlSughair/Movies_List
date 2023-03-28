@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
+import { BsChevronDoubleLeft, BsChevronDoubleRight, BsFillStarFill } from 'react-icons/bs';
 import { TbHeartPlus } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -61,7 +61,7 @@ export default function Home() {
               <Link to={'/movieDetails?id=' + el.id}>
                 <h4>{el.title}</h4>
               </Link>
-              <p>{el.vote_average} / 10</p>
+              <p><BsFillStarFill></BsFillStarFill> {el.vote_average}</p>
               {/* Add style to Modal and modify its name to be more representative */}
               <Modal id={el.id} button_content={<TbHeartPlus></TbHeartPlus>} message="Do you want to add this movie to your favorites?" handleClick={addToFavorite}/>
             </div>
