@@ -63,7 +63,7 @@ export default function Home() {
               </Link>
               <p><BsFillStarFill></BsFillStarFill> {el.vote_average}</p>
               {/* Add style to Modal and modify its name to be more representative */}
-              <Modal id={el.id} button_content={<TbHeartPlus></TbHeartPlus>} message="Do you want to add this movie to your favorites?" handleClick={addToFavorite}/>
+              <Modal id={el.id} button_content={<TbHeartPlus></TbHeartPlus>} message={"Do you want to add '" + el.title + "' to your favorites?"} handleClick={addToFavorite}/>
             </div>
           );
         })}
